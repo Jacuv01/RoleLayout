@@ -1,0 +1,14 @@
+## Interface: 100200
+## Title: RoleLayout
+## Notes: Simple addon to preselect Edit Mode Layouts based on your role.
+## Author: Jacuv
+## Version: 1.0.0
+## SavedVariables: RoleLayoutDB
+
+# Main Addon File
+RoleLayout.lua
+
+# Core modules
+Modules\frames.lua
+Modules\functions.lua
+Modules\events.lua
