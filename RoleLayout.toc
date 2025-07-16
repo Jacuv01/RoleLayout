@@ -5,6 +5,10 @@
 ## Version: 1.0.0
 ## SavedVariables: RoleLayoutDB
 
+# Librerías externas
+Libs\LibStub\LibStub.lua
+Libs\LibEditModeOverride\LibEditModeOverride.lua
+
 # Main Addon File
 RoleLayout.lua
 
