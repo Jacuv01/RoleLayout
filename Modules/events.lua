@@ -1,8 +1,12 @@
 local _, RoleLayout = ...
 local LibEditModeOverride = LibStub and LibStub("LibEditModeOverride-1.0", true)
 
--- Set this to true to enable debug prints
-local DEBUG = false
+
+
+-- Role normalization table (only created once)
+local roleMap = { DAMAGER = "DPS", HEALER = "HEAL", TANK = "TANK" }
+
+
 
 -- Event handling for character data initialization and specialization change detection
 local eventFrame = CreateFrame("Frame")
@@ -17,26 +21,24 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 
     if RoleLayout and RoleLayout.GetCharacterRole then
         local role = RoleLayout:GetCharacterRole()
-        local roleMap = { DAMAGER = "DPS", HEALER = "HEAL", TANK = "TANK" }
         local normalizedRole = roleMap[role] or role
 
-        if DEBUG then print("LibEditModeOverride:", LibEditModeOverride) end
+        RoleLayout:Log("LibEditModeOverride: " .. tostring(LibEditModeOverride))
         if LibEditModeOverride and LibEditModeOverride.LoadLayouts and LibEditModeOverride.SetActiveLayout then
             if LibEditModeOverride:IsReady() then
                 LibEditModeOverride:LoadLayouts()
                 if LibEditModeOverride:DoesLayoutExist(normalizedRole) then
                     LibEditModeOverride:SetActiveLayout(normalizedRole)
                     LibEditModeOverride:SaveOnly()
-                    if DEBUG then print("Layout automatically changed to: " .. tostring(normalizedRole)) end
+                    RoleLayout:Log("Layout automatically changed to: " .. tostring(normalizedRole))
                 else
-                    if DEBUG then print("No layout found with the name: " .. tostring(normalizedRole)) end
+                    RoleLayout:Log("No layout found with the name: " .. tostring(normalizedRole))
                 end
             else
-                if DEBUG then print("Edit Mode is not ready yet. Try opening it manually once per session.") end
+                RoleLayout:Log("Edit Mode is not ready yet. Try opening it manually once per session.")
             end
         else
-            if DEBUG then print("LibEditModeOverride is not available or does not have the required functions.") end
+            RoleLayout:Log("LibEditModeOverride is not available or does not have the required functions.")
         end
     end
 end)
-

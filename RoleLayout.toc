@@ -2,17 +2,17 @@
 ## Title: RoleLayout
 ## Notes: Simple addon to preselect Edit Mode Layouts based on your role.
 ## Author: Jacuv
-## Version: 1.0.0
+## Version: 1.0.0-beta
 ## SavedVariables: RoleLayoutDB
 
 # Librerías externas
-Libs\LibStub\LibStub.lua
-Libs\LibEditModeOverride\LibEditModeOverride.lua
+Libs/LibStub/LibStub.lua
+Libs/LibEditModeOverride/LibEditModeOverride.lua
 
 # Main Addon File
 RoleLayout.lua
 
 # Core modules
-Modules\frames.lua
-Modules\functions.lua
-Modules\events.lua
+Modules/frames.lua
+Modules/functions.lua
+Modules/events.lua

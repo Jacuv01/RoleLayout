@@ -1,5 +1,15 @@
 local _, RoleLayout = ...
 
+-- Set this to true to enable debug prints
+local DEBUG = false
+
+-- Logging helper
+local function Log(msg)
+    if DEBUG and DEFAULT_CHAT_FRAME then
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00[RoleLayout]|r " .. tostring(msg))
+    end
+end
+
 -- Retrieve the list of Layouts in the edit mode
 
 function RoleLayout:ChangeLayoutForRole(role)
