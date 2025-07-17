@@ -25,7 +25,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
         local role = RoleLayout:GetCharacterRole()
         local normalizedRole = roleMap[role] or role
 
-        RoleLayout:Log("LibEditModeOverride: " .. tostring(LibEditModeOverride))
+        RoleLayout:Log("LibEditModeOverride loaded: " .. tostring(LibEditModeOverride ~= nil))
         if LibEditModeOverride and LibEditModeOverride.LoadLayouts and LibEditModeOverride.SetActiveLayout then
             if LibEditModeOverride:IsReady() then
                 LibEditModeOverride:LoadLayouts()
