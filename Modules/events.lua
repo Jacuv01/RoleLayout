@@ -1,8 +1,10 @@
 local _, RoleLayout = ...
 local LibEditModeOverride = LibStub and LibStub("LibEditModeOverride-1.0", true)
-
-
-
+if not LibEditModeOverride then
+    if RoleLayout and RoleLayout.Log then
+        RoleLayout:Log("Error: Failed to load LibEditModeOverride-1.0. Automatic layout switching will not work.")
+    end
+end
 -- Role normalization table (only created once)
 local roleMap = { DAMAGER = "DPS", HEALER = "HEAL", TANK = "TANK" }
 
