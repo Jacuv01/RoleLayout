@@ -10,7 +10,7 @@ function RoleLayout:Log(msg)
     end
 end
 
--- Retrieve the list of Layouts in the edit mode
+-- Retrieves the list of layouts, logs available layouts, and changes the active layout to match the specified role if found.
 
 function RoleLayout:ChangeLayoutForRole(role)
     local layouts = C_EditMode.GetLayouts()
@@ -29,7 +29,7 @@ function RoleLayout:ChangeLayoutForRole(role)
     end
 end
 
--- Retrieve the character's role based on specialization
+-- Retrieves the character's role based on specialization and logs details such as the specialization index, ID, name, and role.
 
 function RoleLayout:GetCharacterRole()
     if GetSpecialization then
@@ -44,7 +44,7 @@ function RoleLayout:GetCharacterRole()
     end
 end
 
--- Initializes action bars and autoloot settings
+-- Enables all action bar toggles and sets the auto-loot behavior to default
 
 function RoleLayout:InitializeCharacterSettings()
     SetActionBarToggles(true,true,true,true,true,true,true,"true")

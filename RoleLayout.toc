@@ -5,7 +5,7 @@
 ## Version: 1.0.0-beta
 ## SavedVariables: RoleLayoutDB
 
-# Librerías externas
+# External Libraries
 Libs/LibStub/LibStub.lua
 Libs/LibEditModeOverride/LibEditModeOverride.lua
 
