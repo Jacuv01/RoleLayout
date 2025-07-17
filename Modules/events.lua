@@ -23,6 +23,10 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
 
     if RoleLayout and RoleLayout.GetCharacterRole then
         local role = RoleLayout:GetCharacterRole()
+        if not role or role == "NONE" then
+            RoleLayout:Log("Invalid role detected: " .. tostring(role) .. ". Skipping layout switching.")
+            return
+        end
         local normalizedRole = roleMap[role] or role
 
         RoleLayout:Log("LibEditModeOverride loaded: " .. tostring(LibEditModeOverride ~= nil))
