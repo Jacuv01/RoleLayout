@@ -6,7 +6,7 @@
 ## SavedVariables: RoleLayoutDB
 
 # External Libraries
-Libs/LibStub/LibStub.lua
+Libs/LibEditModeOverride/LibStub/LibStub.lua
 Libs/LibEditModeOverride/LibEditModeOverride.lua
 
 # Main Addon File
