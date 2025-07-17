@@ -1,11 +1,11 @@
 local _, RoleLayout = ...
 
 -- Set this to true to enable debug prints
-local DEBUG = false
+RoleLayout.DEBUG = false
 
 -- Logging helper
-local function Log(msg)
-    if DEBUG and DEFAULT_CHAT_FRAME then
+function RoleLayout:Log(msg)
+    if self.DEBUG and DEFAULT_CHAT_FRAME then
         DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00[RoleLayout]|r " .. tostring(msg))
     end
 end
@@ -15,14 +15,14 @@ end
 function RoleLayout:ChangeLayoutForRole(role)
     local layouts = C_EditMode.GetLayouts()
     if not layouts or not layouts.layouts then
-        print("No layouts found.")
+        self:Log("No layouts found.")
         return
     end
     for i, layout in ipairs(layouts.layouts) do
-        print("Layout disponible:", layout.layoutName)
+        self:Log("Available layout: " .. layout.layoutName)
         if layout.layoutName == role then
-            print("Changing layout to: " .. layout.layoutName)
-            print("Layout ID:", i)
+            self:Log("Changing layout to: " .. layout.layoutName)
+            self:Log("Layout ID: " .. i)
             C_EditMode.SetActiveLayout(i)
             return layout
         end
@@ -34,10 +34,10 @@ end
 function RoleLayout:GetCharacterRole()
     if GetSpecialization then
         local specIndex = GetSpecialization()
-        print("specIndex:", specIndex)
+        self:Log("specIndex: " .. tostring(specIndex))
         if specIndex then
             local id, name, description, icon, role = GetSpecializationInfo(specIndex)
-            print("Specialization ID:", id, "Name:", name, "Role:", role)
+            self:Log("Specialization ID: " .. tostring(id) .. ", Name: " .. tostring(name) .. ", Role: " .. tostring(role))
             return role
         end
         return "NONE"
