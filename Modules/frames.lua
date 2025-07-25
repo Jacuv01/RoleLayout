@@ -37,7 +37,7 @@ function RoleLayout.Window:Create()
     RoleLayoutDB = RoleLayoutDB or {}
     RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or GenerateDefaultActionBars()
 
-function GenerateDefaultActionBars()
+local function GenerateDefaultActionBars()
     local defaults = {}
     for i = 1, 7 do
         defaults[i] = true
