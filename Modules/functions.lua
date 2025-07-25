@@ -54,13 +54,13 @@ function RoleLayout:InitializeCharacterSettings()
 
 
     SetActionBarToggles(
-        RoleLayoutDB.actionBars[1] and true or false,
-        RoleLayoutDB.actionBars[2] and true or false,
-        RoleLayoutDB.actionBars[3] and true or false,
-        RoleLayoutDB.actionBars[4] and true or false,
-        RoleLayoutDB.actionBars[5] and true or false,
-        RoleLayoutDB.actionBars[6] and true or false,
-        RoleLayoutDB.actionBars[7] and true or false,
+        RoleLayoutDB.actionBars[1],
+        RoleLayoutDB.actionBars[2],
+        RoleLayoutDB.actionBars[3],
+        RoleLayoutDB.actionBars[4],
+        RoleLayoutDB.actionBars[5],
+        RoleLayoutDB.actionBars[6],
+        RoleLayoutDB.actionBars[7],
        "true"
     )
     SetCVar("autoLootDefault", 1)
