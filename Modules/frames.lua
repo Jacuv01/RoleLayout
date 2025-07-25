@@ -35,14 +35,15 @@ function RoleLayout.Window:Create()
 
     f.checkboxes = {}
     RoleLayoutDB = RoleLayoutDB or {}
-    RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or (function()
-        local defaults = {}
-        for i = 1, #actionBarLabels do
-            defaults[i] = true
-        end
-        return defaults
-    end)()
+    RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or GenerateDefaultActionBars()
 
+function GenerateDefaultActionBars()
+    local defaults = {}
+    for i = 1, #actionBarLabels do
+        defaults[i] = true
+    end
+    return defaults
+end
     for i = 1, 7 do
         local cb = CreateFrame("CheckButton", "RoleLayoutActionBarCB"..i, f, "ChatConfigCheckButtonTemplate")
         cb:SetPoint("TOPLEFT", 20, -40 - (i-1)*30)
