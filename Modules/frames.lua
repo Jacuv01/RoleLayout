@@ -44,7 +44,7 @@ function GenerateDefaultActionBars()
     end
     return defaults
 end
-    for i = 1, 7 do
+    for i = 1, #actionBarLabels do
         local cb = CreateFrame("CheckButton", "RoleLayoutActionBarCB"..i, f, "ChatConfigCheckButtonTemplate")
         cb:SetPoint("TOPLEFT", 20, -40 - (i-1)*30)
         _G[cb:GetName().."Text"]:SetText(actionBarLabels[i])
