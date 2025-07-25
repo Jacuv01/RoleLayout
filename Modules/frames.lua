@@ -13,7 +13,7 @@ local actionBarLabels = {
 }
 
 function RoleLayout.Window:Create()
-    if self.frame then return self.frame end -- Prevent duplicate creation
+    if self.frame then return self.frame end 
 
     local f = CreateFrame("Frame", "RoleLayoutWindow", UIParent, "BasicFrameTemplateWithInset")
     f:SetSize(350, 320)
@@ -39,15 +39,15 @@ function RoleLayout.Window:Create()
 
 function GenerateDefaultActionBars()
     local defaults = {}
-    for i = 2, 8 do -- Align indices with action bar numbers (2-8)
+    for i = 1, 7 do
         defaults[i] = true
     end
     return defaults
 end
-    for i = 2, 8 do -- Align indices with action bar numbers (2-8)
+    for i = 1, 7 do
         local cb = CreateFrame("CheckButton", "RoleLayoutActionBarCB"..i, f, "ChatConfigCheckButtonTemplate")
-        cb:SetPoint("TOPLEFT", 20, -40 - (i-2)*30) -- Adjust positioning to match new indices
-        _G[cb:GetName().."Text"]:SetText(actionBarLabels[i-1]) -- Use i-1 to access labels correctly
+        cb:SetPoint("TOPLEFT", 20, -40 - (i-1)*30)
+        _G[cb:GetName().."Text"]:SetText(actionBarLabels[i])
         cb:SetChecked(RoleLayoutDB.actionBars[i])
         cb:SetScript("OnClick", function(self)
             RoleLayoutDB.actionBars[i] = self:GetChecked()
@@ -56,7 +56,6 @@ end
     end
 
     local applyBtn = RoleLayout:CreateButton(f, "Apply Bars", 120, 24, "BOTTOMLEFT", 10, 10, function()
-        -- Apply the selected action bars
         SetActionBarToggles(
             RoleLayoutDB.actionBars[1],
             RoleLayoutDB.actionBars[2],
