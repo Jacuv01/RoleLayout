@@ -44,9 +44,37 @@ function RoleLayout:GetCharacterRole()
     end
 end
 
--- Enables all action bar toggles and sets the auto-loot behavior to default
-
 function RoleLayout:InitializeCharacterSettings()
-    SetActionBarToggles(true,true,true,true,true,true,true,"true")
+        RoleLayoutDB = RoleLayoutDB or {}
+    RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or {}
+
+    for i = 1, 7 do
+        if type(RoleLayoutDB.actionBars[i]) ~= "boolean" then
+            RoleLayoutDB.actionBars[i] = true
+        end
+    end
+
+
+    SetActionBarToggles(
+        RoleLayoutDB.actionBars[1],
+        RoleLayoutDB.actionBars[2],
+        RoleLayoutDB.actionBars[3],
+        RoleLayoutDB.actionBars[4],
+        RoleLayoutDB.actionBars[5],
+        RoleLayoutDB.actionBars[6],
+        RoleLayoutDB.actionBars[7],
+       "true"
+    )
     SetCVar("autoLootDefault", 1)
+end
+
+function RoleLayout:CreateButton(parent, text, width, height, point, x, y, onClick)
+    local btn = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+    btn:SetSize(width, height)
+    btn:SetPoint(point, x, y)
+    btn:SetText(text)
+    if onClick then
+        btn:SetScript("OnClick", onClick)
+    end
+    return btn
 end

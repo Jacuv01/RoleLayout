@@ -4,6 +4,7 @@
 ## Author: Jacuv
 ## Version: 1.0.0-beta
 ## SavedVariables: RoleLayoutDB
+## X-Curse-Project-ID: 1308338
 
 # External Libraries
 Libs/LibEditModeOverride/LibStub/LibStub.lua
