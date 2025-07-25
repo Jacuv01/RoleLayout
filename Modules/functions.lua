@@ -48,7 +48,14 @@ function RoleLayout:InitializeCharacterSettings()
         RoleLayoutDB = RoleLayoutDB or {}
     RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or {}
 
-    if not RoleLayoutDB.actionBars or #RoleLayoutDB.actionBars == 0 then
+    local isValid = true
+    for i = 1, 7 do
+        if type(RoleLayoutDB.actionBars[i]) ~= "boolean" then
+            isValid = false
+            break
+        end
+    end
+    if not isValid then
         return
     end
 
