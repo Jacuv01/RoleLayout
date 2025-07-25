@@ -35,8 +35,6 @@ function RoleLayout.Window:Create()
 
     f.checkboxes = {}
     RoleLayoutDB = RoleLayoutDB or {}
-    RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or GenerateDefaultActionBars()
-
 local function GenerateDefaultActionBars()
     local defaults = {}
     for i = 1, 7 do
