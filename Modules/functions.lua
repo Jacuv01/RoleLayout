@@ -50,7 +50,7 @@ function RoleLayout:InitializeCharacterSettings()
 
     for i = 1, 7 do
         if type(RoleLayoutDB.actionBars[i]) ~= "boolean" then
-            RoleLayoutDB.actionBars[i] = false
+            RoleLayoutDB.actionBars[i] = true
         end
     end
 
