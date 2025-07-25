@@ -2,7 +2,7 @@
 ## Title: RoleLayout
 ## Notes: Simple addon to preselect Edit Mode Layouts based on your role.
 ## Author: Jacuv
-## Version: 1.0.0-beta
+## Version: 1.0.0
 ## SavedVariables: RoleLayoutDB
 ## X-Curse-Project-ID: 1308338
 
