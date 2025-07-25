@@ -39,15 +39,15 @@ function RoleLayout.Window:Create()
 
 function GenerateDefaultActionBars()
     local defaults = {}
-    for i = 1, #actionBarLabels do
+    for i = 2, 8 do -- Align indices with action bar numbers (2-8)
         defaults[i] = true
     end
     return defaults
 end
-    for i = 1, #actionBarLabels do
+    for i = 2, 8 do -- Align indices with action bar numbers (2-8)
         local cb = CreateFrame("CheckButton", "RoleLayoutActionBarCB"..i, f, "ChatConfigCheckButtonTemplate")
-        cb:SetPoint("TOPLEFT", 20, -40 - (i-1)*30)
-        _G[cb:GetName().."Text"]:SetText(actionBarLabels[i])
+        cb:SetPoint("TOPLEFT", 20, -40 - (i-2)*30) -- Adjust positioning to match new indices
+        _G[cb:GetName().."Text"]:SetText(actionBarLabels[i-1]) -- Use i-1 to access labels correctly
         cb:SetChecked(RoleLayoutDB.actionBars[i])
         cb:SetScript("OnClick", function(self)
             RoleLayoutDB.actionBars[i] = self:GetChecked()
