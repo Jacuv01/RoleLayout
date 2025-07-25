@@ -44,8 +44,6 @@ function RoleLayout:GetCharacterRole()
     end
 end
 
-
-
 function RoleLayout:InitializeCharacterSettings()
         RoleLayoutDB = RoleLayoutDB or {}
     RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or {}

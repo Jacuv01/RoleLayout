@@ -85,4 +85,3 @@ SLASH_ROLELAYOUT1 = "/rolelayout"
 SlashCmdList.ROLELAYOUT = function()
     RoleLayout.Window:Show()
 end
-
