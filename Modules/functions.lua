@@ -44,6 +44,7 @@ function RoleLayout:GetCharacterRole()
     end
 end
 
+
 function RoleLayout:InitializeCharacterSettings()
         RoleLayoutDB = RoleLayoutDB or {}
     RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or {}
@@ -77,4 +78,5 @@ function RoleLayout:CreateButton(parent, text, width, height, point, x, y, onCli
         btn:SetScript("OnClick", onClick)
     end
     return btn
+
 end
