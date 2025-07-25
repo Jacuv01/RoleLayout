@@ -14,4 +14,3 @@ jobs:
         uses: BigWigsMods/packager@master
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
-          WOINTERFACE_API_TOKEN: ${{ secrets.WOINTERFACE_API_TOKEN }}
