@@ -1,6 +1,5 @@
 local _, RoleLayout = ...
 
--- Set this to true to enable debug prints
 RoleLayout.DEBUG = false
 
 -- Logging helper
@@ -10,62 +9,63 @@ function RoleLayout:Log(msg)
     end
 end
 
--- Retrieves the list of layouts, logs available layouts, and changes the active layout to match the specified role if found.
-
-function RoleLayout:ChangeLayoutForRole(role)
-    local layouts = C_EditMode.GetLayouts()
-    if not layouts or not layouts.layouts then
-        self:Log("No layouts found.")
-        return
-    end
-    for i, layout in ipairs(layouts.layouts) do
-        self:Log("Available layout: " .. layout.layoutName)
-        if layout.layoutName == role then
-            self:Log("Changing layout to: " .. layout.layoutName)
-            self:Log("Layout ID: " .. i)
-            C_EditMode.SetActiveLayout(i)
-            return layout
+function RoleLayout:GetGameplayEnhancementsSettings()
+    local external = false
+    if GetCVarBool then
+        external = GetCVarBool("externalDefensivesEnabled")
+        if not external then
+            external = GetCVarBool("enableExternalDefensives")
         end
     end
+    local damage = GetCVarBool and GetCVarBool("damageMeterEnabled") or false
+    return external and true or false, damage and true or false
 end
 
--- Retrieves the character's role based on specialization and logs details such as the specialization index, ID, name, and role.
+function RoleLayout:ApplyGameplayEnhancementsSettings(externalEnabled, damageMeterEnabled)
+    local externalValue = externalEnabled and "1" or "0"
+    local damageValue = damageMeterEnabled and "1" or "0"
 
-function RoleLayout:GetCharacterRole()
-    if GetSpecialization then
-        local specIndex = GetSpecialization()
-        self:Log("specIndex: " .. tostring(specIndex))
-        if specIndex then
-            local id, name, description, icon, role = GetSpecializationInfo(specIndex)
-            self:Log("Specialization ID: " .. tostring(id) .. ", Name: " .. tostring(name) .. ", Role: " .. tostring(role))
-            return role
-        end
-        return "NONE"
+    if SetCVar then
+        SetCVar("externalDefensivesEnabled", externalValue)
+        SetCVar("enableExternalDefensives", externalValue)
+        SetCVar("damageMeterEnabled", damageValue)
     end
 end
-
 
 function RoleLayout:InitializeCharacterSettings()
-        RoleLayoutDB = RoleLayoutDB or {}
-    RoleLayoutDB.actionBars = RoleLayoutDB.actionBars or {}
+    local db = self:GetDB()
+    db.actionBars = db.actionBars or {}
+
+    if type(db.enableExternalDefensives) ~= "boolean" then
+        db.enableExternalDefensives = false
+    end
+
+    if type(db.enableDamageMeter) ~= "boolean" then
+        db.enableDamageMeter = false
+    end
 
     for i = 1, 7 do
-        if type(RoleLayoutDB.actionBars[i]) ~= "boolean" then
-            RoleLayoutDB.actionBars[i] = true
+        if type(db.actionBars[i]) ~= "boolean" then
+            db.actionBars[i] = true
         end
     end
 
-
     SetActionBarToggles(
-        RoleLayoutDB.actionBars[1],
-        RoleLayoutDB.actionBars[2],
-        RoleLayoutDB.actionBars[3],
-        RoleLayoutDB.actionBars[4],
-        RoleLayoutDB.actionBars[5],
-        RoleLayoutDB.actionBars[6],
-        RoleLayoutDB.actionBars[7],
-       "true"
+        db.actionBars[1],
+        db.actionBars[2],
+        db.actionBars[3],
+        db.actionBars[4],
+        db.actionBars[5],
+        db.actionBars[6],
+        db.actionBars[7],
+        "true"
     )
+
+    self:ApplyGameplayEnhancementsSettings(
+        db.enableExternalDefensives,
+        db.enableDamageMeter
+    )
+
     SetCVar("autoLootDefault", 1)
 end
 
@@ -78,5 +78,4 @@ function RoleLayout:CreateButton(parent, text, width, height, point, x, y, onCli
         btn:SetScript("OnClick", onClick)
     end
     return btn
-
 end

@@ -1,6 +1,10 @@
 ## Interface: 100000
 ## Title: LibEditModeOverride
+<<<<<<< HEAD
 ## Version: @project-version@
+=======
+## Version: v1.0.1
+>>>>>>> f02ba5a (Refactor RoleLayout architecture and UI)
 ## Author: plusmouse
 ## OptionalDeps: LibStub
 

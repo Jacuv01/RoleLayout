@@ -1,20 +1,20 @@
 # RoleLayout
 
-RoleLayout is a World of Warcraft addon that automatically selects your preferred Edit Mode layout based on your character's current role (Tank, Healer, or DPS). It also enables all action bars and autoloot for your convenience.
+RoleLayout is a World of Warcraft addon that automatically selects your preferred Edit Mode layout based on your character's current role (Tank, Healer, or DPS). It also helps manage action bars and optional gameplay enhancements from a cleaner, modular configuration flow.
 
 ## Features
 
 - Automatically switches Edit Mode layout when you change specialization or log in.
 - Supports custom layouts named "TANK", "HEAL", or "DPS".
-- Enables all action bars on login.
-- Enables autoloot on login.
-- Lightweight and easy to use.
+- Lets you configure action bars through a dedicated options flow.
+- Supports optional gameplay enhancements such as external defensives and damage meter settings.
+- Uses a more modular internal structure for easier maintenance and future expansion.
 
 ## How It Works
 
 1. Create your preferred Edit Mode layouts and name them exactly as "TANK", "HEAL", or "DPS".
 2. When you log in or change specialization, RoleLayout will automatically activate the layout that matches your current role.
-3. All action bars and autoloot will be enabled automatically.
+3. You can review and adjust your settings through the addon options panel.
 
 ## Installation
 
@@ -30,7 +30,7 @@ RoleLayout is a World of Warcraft addon that automatically selects your preferre
 
 ## Project Status & Feedback
 
-RoleLayout is an ongoing project and will continue to receive new features and improvements in the future. Suggestions, feedback, and contributions are welcome! If you have ideas or requests, feel free to open an issue or contact the author.
+RoleLayout is now structured around a more modular architecture and is prepared for additional features and refinements in the future.
 
 ## Credits
 

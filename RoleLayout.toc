@@ -1,4 +1,4 @@
-## Interface: 100200
+## Interface: 120000
 ## Title: RoleLayout
 ## Notes: Simple addon to preselect Edit Mode Layouts based on your role.
 ## Author: Jacuv
@@ -14,6 +14,9 @@ Libs/LibEditModeOverride/LibEditModeOverride.lua
 RoleLayout.lua
 
 # Core modules
-Modules/frames.lua
+Modules/state.lua
+Modules/services.lua
 Modules/functions.lua
+Modules/options.lua
 Modules/events.lua
+Modules/frames.lua

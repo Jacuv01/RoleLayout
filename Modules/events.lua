@@ -5,46 +5,42 @@ if not LibEditModeOverride then
         RoleLayout:Log("Error: Failed to load LibEditModeOverride-1.0. Automatic layout switching will not work.")
     end
 end
--- Role normalization table (only created once)
-local roleMap = { DAMAGER = "DPS", HEALER = "HEAL", TANK = "TANK" }
 
+local function applyLayoutForCurrentRole()
+    if not RoleLayout or not RoleLayout.GetCharacterRole then
+        return
+    end
 
+    local role = RoleLayout:GetCharacterRole()
+    if not role or role == "NONE" then
+        RoleLayout:Log("Invalid role detected: " .. tostring(role) .. ". Skipping layout switching.")
+        return
+    end
 
--- Event handling for character data initialization and specialization change detection
+    if RoleLayout and RoleLayout.ApplyRoleLayout then
+        RoleLayout:ApplyRoleLayout(role)
+    end
+end
+
 local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("PLAYER_LOGIN")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 eventFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 eventFrame:SetScript("OnEvent", function(self, event, ...)
-    if event == "PLAYER_ENTERING_WORLD" then
-        if RoleLayout and RoleLayout.InitializeCharacterSettings then
-            RoleLayout:InitializeCharacterSettings()
+    if event == "PLAYER_LOGIN" then
+        RoleLayout:Initialize()
+        if RoleLayout.Window and RoleLayout.Window.CreateGameOptionsPanel then
+            RoleLayout.Window:CreateGameOptionsPanel()
         end
+        self:UnregisterEvent("PLAYER_LOGIN")
+        return
     end
 
-    if RoleLayout and RoleLayout.GetCharacterRole then
-        local role = RoleLayout:GetCharacterRole()
-        if not role or role == "NONE" then
-            RoleLayout:Log("Invalid role detected: " .. tostring(role) .. ". Skipping layout switching.")
-            return
-        end
-        local normalizedRole = roleMap[role] or role
+    if event == "PLAYER_ENTERING_WORLD" then
+        RoleLayout:Initialize()
+    end
 
-        RoleLayout:Log("LibEditModeOverride loaded: " .. tostring(LibEditModeOverride ~= nil))
-        if LibEditModeOverride and LibEditModeOverride.LoadLayouts and LibEditModeOverride.SetActiveLayout then
-            if LibEditModeOverride:IsReady() then
-                LibEditModeOverride:LoadLayouts()
-                if LibEditModeOverride:DoesLayoutExist(normalizedRole) then
-                    LibEditModeOverride:SetActiveLayout(normalizedRole)
-                    LibEditModeOverride:SaveOnly()
-                    RoleLayout:Log("Layout automatically changed to: " .. tostring(normalizedRole))
-                else
-                    RoleLayout:Log("No layout found with the name: " .. tostring(normalizedRole))
-                end
-            else
-                RoleLayout:Log("Edit Mode is not ready yet. Try opening it manually once per session.")
-            end
-        else
-            RoleLayout:Log("LibEditModeOverride is not available or does not have the required functions.")
-        end
+    if event == "PLAYER_SPECIALIZATION_CHANGED" or event == "PLAYER_ENTERING_WORLD" then
+        applyLayoutForCurrentRole()
     end
 end)
